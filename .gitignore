@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Claude Code session data
+.claude/
+
+# Backup / temp files
+*.copy
+*\ copy
