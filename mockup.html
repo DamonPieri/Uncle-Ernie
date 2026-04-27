@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,28 +7,216 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
 
+  /* ─── THEME TOKENS ─── */
+  :root {
+    --bg-page:            #111;
+    --bg-phone:           #141414;
+    --bg-card:            #1C1C1E;
+    --bg-chip:            rgba(245,240,232,0.07);
+    --bg-icon-well:       #252527;
+    --bg-save-btn:        rgba(245,240,232,0.07);
+    --bg-map:             #1C2535;
+    --bg-map-block:       #1F2D3F;
+    --bg-map-street:      rgba(255,255,255,0.06);
+    --bg-map-poi:         #0D1520;
+    --bg-map-poi-border:  rgba(255,255,255,0.15);
+    --bg-reroll-btn:      rgba(245,240,232,0.07);
+    --bg-splitflap:       #0D0D0D;
+    --bg-flap:            #1E1E1E;
+    --bg-tab-bar:         rgba(20,20,20,0.95);
+
+    --text-primary:       #F5F0E8;
+    --text-secondary:     rgba(245,240,232,0.45);
+    --text-tertiary:      rgba(245,240,232,0.3);
+    --text-label:         rgba(245,240,232,0.4);
+    --text-divider:       rgba(245,240,232,0.3);
+    --text-back-btn:      rgba(245,240,232,0.5);
+    --text-neighborhood:  rgba(245,240,232,0.35);
+    --text-tab-active:    #F5F0E8;
+    --text-tab-inactive:  rgba(245,240,232,0.35);
+
+    --border-card:        rgba(245,240,232,0.05);
+    --border-chip:        rgba(245,240,232,0.12);
+    --border-tab-bar:     rgba(245,240,232,0.07);
+    --border-phone:       #2a2a2a;
+    --border-reroll:      rgba(245,240,232,0.12);
+    --border-save-btn:    transparent;
+    --border-icon-well:   transparent;
+
+    --btn-primary-bg:     #F5F0E8;
+    --btn-primary-text:   #141414;
+    --btn-secondary-bg:   rgba(245,240,232,0.07);
+    --btn-secondary-text: #F5F0E8;
+    --btn-secondary-border: rgba(245,240,232,0.12);
+
+    --divider-line:       rgba(245,240,232,0.1);
+    --nav-indicator:      rgba(245,240,232,0.3);
+    --tab-icon-opacity:   0.35;
+
+    --phone-shadow:       0 40px 80px rgba(0,0,0,0.7);
+    --phone-inset:        inset 0 1px 0 rgba(255,255,255,0.06);
+    --card-shadow:        none;
+    --letsgo-shadow:      none;
+
+    --rating-color:       #FCCC0A;
+    --open-color:         #6CBE45;
+  }
+
+  [data-theme="light"] {
+    --bg-page:            #E8E4DC;
+    --bg-phone:           #F7F3EC;
+    --bg-card:            #ffffff;
+    --bg-chip:            transparent;
+    --bg-icon-well:       #F7F3EC;
+    --bg-save-btn:        #F0EDE6;
+    --bg-map:             #D8E8D0;
+    --bg-map-block:       #C8DCBF;
+    --bg-map-street:      rgba(0,0,0,0.07);
+    --bg-map-poi:         #fff;
+    --bg-map-poi-border:  rgba(0,0,0,0.1);
+    --bg-reroll-btn:      #EDEAE3;
+    --bg-splitflap:       #1A1A1A;
+    --bg-flap:            #2A2A2A;
+    --bg-tab-bar:         rgba(247,243,236,0.95);
+
+    --text-primary:       #1A1A1A;
+    --text-secondary:     rgba(26,26,26,0.45);
+    --text-tertiary:      rgba(26,26,26,0.35);
+    --text-label:         rgba(26,26,26,0.35);
+    --text-divider:       rgba(26,26,26,0.3);
+    --text-back-btn:      rgba(26,26,26,0.45);
+    --text-neighborhood:  rgba(247,243,236,0.45);
+    --text-tab-active:    #1A1A1A;
+    --text-tab-inactive:  rgba(26,26,26,0.35);
+
+    --border-card:        #EAE6DE;
+    --border-chip:        #D8D2C8;
+    --border-tab-bar:     #E0DBD2;
+    --border-phone:       #D8D2C8;
+    --border-reroll:      #D8D2C8;
+    --border-save-btn:    #D8D2C8;
+    --border-icon-well:   #EAE6DE;
+
+    --btn-primary-bg:     #1A1A1A;
+    --btn-primary-text:   #F7F3EC;
+    --btn-secondary-bg:   #EDEAE3;
+    --btn-secondary-text: #1A1A1A;
+    --btn-secondary-border: #D8D2C8;
+
+    --divider-line:       rgba(26,26,26,0.1);
+    --nav-indicator:      rgba(26,26,26,0.2);
+    --tab-icon-opacity:   0.3;
+
+    --phone-shadow:       0 40px 80px rgba(0,0,0,0.18);
+    --phone-inset:        inset 0 1px 0 rgba(255,255,255,0.8);
+    --card-shadow:        0 2px 8px rgba(0,0,0,0.05);
+    --letsgo-shadow:      0 4px 16px rgba(0,57,166,0.3);
+
+    --rating-color:       #D4900A;
+    --open-color:         #2E7D32;
+  }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    background: #111;
+    background: var(--bg-page);
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 40px;
-    padding: 40px;
+    flex-direction: column;
+    align-items: center;
     font-family: 'Inter', sans-serif;
     min-height: 100vh;
+    transition: background 0.3s ease;
+  }
+
+  /* ─── TOGGLE BAR ─── */
+  .top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 28px 0 32px;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-page);
+    transition: background 0.3s ease;
+  }
+
+  .top-bar-label {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    opacity: 0.35;
+    transition: color 0.3s;
+  }
+
+  .theme-toggle {
+    position: relative;
+    width: 72px;
+    height: 36px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-chip);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.3s, border-color 0.3s;
+    display: flex;
+    align-items: center;
+    padding: 3px;
+  }
+
+  .toggle-thumb {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--btn-primary-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), background 0.3s;
+    transform: translateX(0);
+    flex-shrink: 0;
+  }
+
+  [data-theme="light"] .toggle-thumb {
+    transform: translateX(36px);
+  }
+
+  .toggle-icon-bg {
+    position: absolute;
+    right: 7px;
+    font-size: 14px;
+    opacity: 0.4;
+    transition: opacity 0.3s;
+  }
+
+  [data-theme="light"] .toggle-icon-bg {
+    left: 7px;
+    right: auto;
+    opacity: 0.4;
+  }
+
+  /* ─── SCREENS WRAPPER ─── */
+  .screens-row {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 0 40px 60px;
     flex-wrap: wrap;
   }
 
   .phone-label {
-    color: #666;
+    color: var(--text-secondary);
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     text-align: center;
     margin-bottom: 12px;
+    transition: color 0.3s;
   }
 
   .phone-wrap { display: flex; flex-direction: column; align-items: center; }
@@ -36,12 +224,13 @@
   .phone {
     width: 375px;
     height: 812px;
-    background: #141414;
+    background: var(--bg-phone);
     border-radius: 54px;
-    border: 2px solid #2a2a2a;
+    border: 2px solid var(--border-phone);
     overflow: hidden;
     position: relative;
-    box-shadow: 0 40px 80px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.06);
+    box-shadow: var(--phone-shadow), var(--phone-inset);
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
   }
 
   /* ─── STATUS BAR ─── */
@@ -51,13 +240,14 @@
     align-items: center;
     padding: 14px 28px 0;
     height: 44px;
-    color: #F5F0E8;
+    color: var(--text-primary);
     font-size: 12px;
     font-weight: 600;
+    transition: color 0.3s;
   }
   .status-bar .time { font-size: 15px; font-weight: 700; }
   .status-icons { display: flex; gap: 6px; align-items: center; }
-  .status-icons svg { width: 16px; height: 16px; fill: #F5F0E8; }
+  .status-icons svg { width: 16px; height: 16px; fill: var(--text-primary); transition: fill 0.3s; }
 
   /* ─── SCREEN 1: HOME ─── */
   .screen-home {
@@ -67,35 +257,34 @@
     flex-direction: column;
   }
 
-  .home-header {
-    padding-top: 20px;
-    margin-bottom: 28px;
-  }
+  .home-header { padding-top: 20px; margin-bottom: 28px; }
 
   .app-title {
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #F5F0E8;
-    opacity: 0.5;
+    color: var(--text-primary);
+    opacity: 0.4;
     margin-bottom: 4px;
+    transition: color 0.3s;
   }
 
   .home-headline {
     font-size: 30px;
     font-weight: 900;
-    color: #F5F0E8;
+    color: var(--text-primary);
     line-height: 1.1;
     letter-spacing: -0.02em;
+    transition: color 0.3s;
   }
 
   .home-sub {
     font-size: 14px;
-    color: #F5F0E8;
-    opacity: 0.45;
+    color: var(--text-secondary);
     margin-top: 6px;
     font-weight: 500;
+    transition: color 0.3s;
   }
 
   .section-label {
@@ -103,9 +292,9 @@
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #F5F0E8;
-    opacity: 0.4;
+    color: var(--text-label);
     margin-bottom: 14px;
+    transition: color 0.3s;
   }
 
   .line-grid {
@@ -126,17 +315,14 @@
     color: #fff;
     cursor: pointer;
     transition: transform 0.15s, box-shadow 0.15s;
-    position: relative;
+  }
+
+  [data-theme="light"] .line-bubble {
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
   }
 
   .line-bubble:hover { transform: scale(1.12); }
 
-  .line-bubble.selected {
-    box-shadow: 0 0 0 3px #fff;
-    transform: scale(1.12);
-  }
-
-  /* MTA line colors */
   .line-1, .line-2, .line-3 { background: #EE352E; }
   .line-4, .line-5, .line-6 { background: #00933C; }
   .line-7 { background: #B933AD; }
@@ -152,13 +338,13 @@
   .surprise-btn {
     width: 100%;
     padding: 18px;
-    background: #F5F0E8;
+    background: var(--btn-primary-bg);
     border: none;
     border-radius: 16px;
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     font-weight: 800;
-    color: #141414;
+    color: var(--btn-primary-text);
     letter-spacing: -0.01em;
     cursor: pointer;
     display: flex;
@@ -166,10 +352,9 @@
     justify-content: center;
     gap: 10px;
     margin-top: auto;
-    transition: opacity 0.15s;
+    transition: background 0.3s, color 0.3s, opacity 0.15s;
   }
-  .surprise-btn:hover { opacity: 0.9; }
-
+  .surprise-btn:hover { opacity: 0.88; }
   .surprise-btn .dice { font-size: 22px; }
 
   .divider-row {
@@ -178,8 +363,8 @@
     gap: 12px;
     margin: 16px 0;
   }
-  .divider-line { flex: 1; height: 1px; background: rgba(245,240,232,0.1); }
-  .divider-text { font-size: 11px; color: rgba(245,240,232,0.3); font-weight: 600; letter-spacing: 0.08em; }
+  .divider-line { flex: 1; height: 1px; background: var(--divider-line); transition: background 0.3s; }
+  .divider-text { font-size: 11px; color: var(--text-divider); font-weight: 600; letter-spacing: 0.08em; transition: color 0.3s; }
 
   /* ─── SCREEN 2: REVEAL ─── */
   .screen-reveal {
@@ -187,30 +372,26 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #141414;
+    background: var(--bg-phone);
     padding: 0 24px 40px;
+    transition: background 0.3s;
   }
 
   .back-btn {
     align-self: flex-start;
     margin-top: 20px;
     margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: rgba(245,240,232,0.5);
+    color: var(--text-back-btn);
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     background: none;
     border: none;
     font-family: 'Inter', sans-serif;
+    transition: color 0.3s;
   }
 
   .line-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     width: 38px;
     height: 38px;
     border-radius: 50%;
@@ -218,7 +399,11 @@
     font-weight: 900;
     color: #fff;
     background: #0039A6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 12px;
+    box-shadow: 0 4px 12px rgba(0,57,166,0.35);
   }
 
   .reveal-label {
@@ -226,17 +411,25 @@
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(245,240,232,0.35);
+    color: var(--text-tertiary);
     margin-bottom: 24px;
+    transition: color 0.3s;
   }
 
+  /* Split-flap stays dark in both themes — it's the signature moment */
   .splitflap-container {
     width: 100%;
-    background: #0D0D0D;
+    background: var(--bg-splitflap);
     border-radius: 20px;
     padding: 28px 20px;
     margin-bottom: 28px;
-    border: 1px solid rgba(245,240,232,0.07);
+    border: 1px solid rgba(245,240,232,0.06);
+    transition: background 0.3s;
+  }
+
+  [data-theme="light"] .splitflap-container {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    border-color: transparent;
   }
 
   .splitflap-row {
@@ -247,7 +440,7 @@
   }
 
   .flap {
-    background: #1E1E1E;
+    background: var(--bg-flap);
     border-radius: 6px;
     width: 28px;
     height: 40px;
@@ -258,22 +451,19 @@
     font-weight: 900;
     color: #F5F0E8;
     font-family: 'Inter', sans-serif;
-    letter-spacing: 0;
     border: 1px solid rgba(255,255,255,0.04);
     position: relative;
     overflow: hidden;
+    transition: background 0.3s;
   }
 
   .flap::after {
     content: '';
     position: absolute;
-    left: 0; right: 0;
-    top: 50%;
+    left: 0; right: 0; top: 50%;
     height: 1px;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.45);
   }
-
-  .flap.space { background: transparent; border-color: transparent; width: 12px; }
 
   .stop-neighborhood {
     text-align: center;
@@ -287,7 +477,7 @@
 
   .borough-tag {
     display: inline-block;
-    background: rgba(0,57,166,0.25);
+    background: rgba(0,57,166,0.3);
     color: #6B9AFF;
     border-radius: 6px;
     padding: 3px 8px;
@@ -301,19 +491,20 @@
   .reroll-btn {
     width: 100%;
     padding: 16px;
-    background: rgba(245,240,232,0.07);
-    border: 1px solid rgba(245,240,232,0.12);
+    background: var(--bg-reroll-btn);
+    border: 1px solid var(--border-reroll);
     border-radius: 14px;
     font-family: 'Inter', sans-serif;
     font-size: 15px;
     font-weight: 700;
-    color: #F5F0E8;
+    color: var(--btn-secondary-text);
     cursor: pointer;
     margin-bottom: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
+    transition: background 0.3s, border-color 0.3s, color 0.3s;
   }
 
   .letsgo-btn {
@@ -329,6 +520,8 @@
     cursor: pointer;
     margin-top: auto;
     letter-spacing: -0.01em;
+    box-shadow: var(--letsgo-shadow);
+    transition: box-shadow 0.3s;
   }
 
   /* ─── SCREEN 3: EXPLORE ─── */
@@ -336,81 +529,78 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    background: #141414;
+    background: var(--bg-phone);
     overflow: hidden;
+    transition: background 0.3s;
   }
 
   .map-area {
     height: 240px;
-    background: #1C2535;
+    background: var(--bg-map);
     position: relative;
     overflow: hidden;
     flex-shrink: 0;
+    transition: background 0.3s;
   }
 
-  /* Fake map grid */
-  .map-grid {
-    position: absolute;
-    inset: 0;
-  }
+  .map-grid { position: absolute; inset: 0; }
+
   .map-street-h {
     position: absolute;
-    left: 0; right: 0;
-    height: 1px;
-    background: rgba(255,255,255,0.06);
+    left: 0; right: 0; height: 1px;
+    background: var(--bg-map-street);
+    transition: background 0.3s;
   }
   .map-street-v {
     position: absolute;
-    top: 0; bottom: 0;
-    width: 1px;
-    background: rgba(255,255,255,0.06);
+    top: 0; bottom: 0; width: 1px;
+    background: var(--bg-map-street);
+    transition: background 0.3s;
   }
   .map-block {
     position: absolute;
-    background: #1F2D3F;
+    background: var(--bg-map-block);
     border-radius: 2px;
+    transition: background 0.3s;
   }
+
   .map-pin {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 50%; left: 50%;
     transform: translate(-50%, -60%);
     display: flex;
     flex-direction: column;
     align-items: center;
   }
   .map-pin-bubble {
-    width: 44px;
-    height: 44px;
+    width: 44px; height: 44px;
     border-radius: 50%;
     background: #0039A6;
     border: 3px solid #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    font-weight: 900;
-    color: #fff;
-    box-shadow: 0 4px 16px rgba(0,57,166,0.5);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 900; color: #fff;
+    box-shadow: 0 4px 16px rgba(0,57,166,0.45);
   }
   .map-pin-tail {
-    width: 3px;
-    height: 12px;
-    background: #fff;
+    width: 3px; height: 12px;
+    background: #0039A6;
     border-radius: 2px;
   }
+
+  [data-theme="dark"] .map-pin-tail { background: #fff; }
+
   .map-poi {
     position: absolute;
-    width: 28px;
-    height: 28px;
+    width: 30px; height: 30px;
     border-radius: 50%;
-    background: #0D1520;
-    border: 2px solid rgba(255,255,255,0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
+    background: var(--bg-map-poi);
+    border: 2px solid var(--bg-map-poi-border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    transition: background 0.3s, border-color 0.3s;
   }
+
+  [data-theme="light"] .map-poi { box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
 
   .explore-header {
     position: absolute;
@@ -421,24 +611,39 @@
     align-items: center;
   }
   .explore-stop-name {
-    font-size: 16px;
-    font-weight: 900;
-    color: #F5F0E8;
+    font-size: 16px; font-weight: 900;
+    color: var(--text-primary);
     letter-spacing: -0.01em;
+    transition: color 0.3s;
   }
+  [data-theme="light"] .explore-stop-name { text-shadow: 0 1px 3px rgba(255,255,255,0.7); }
+
   .explore-stop-sub {
     font-size: 11px;
-    color: rgba(245,240,232,0.45);
+    color: var(--text-secondary);
     font-weight: 600;
     margin-top: 2px;
+    transition: color 0.3s;
   }
+
+  .reroll-map-btn {
+    border-radius: 10px;
+    padding: 6px 12px;
+    font-size: 12px; font-weight: 700;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-card);
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
+  }
+  [data-theme="dark"] .reroll-map-btn { background: rgba(20,20,20,0.7); border-color: transparent; }
 
   .content-area {
     flex: 1;
     overflow-y: auto;
     padding: 0 16px 100px;
   }
-
   .content-area::-webkit-scrollbar { display: none; }
 
   .filter-strip {
@@ -452,171 +657,102 @@
   .filter-chip {
     padding: 7px 14px;
     border-radius: 20px;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 12px; font-weight: 700;
     letter-spacing: 0.04em;
     white-space: nowrap;
     cursor: pointer;
-    border: 1px solid rgba(245,240,232,0.12);
-    color: rgba(245,240,232,0.5);
-    background: transparent;
+    border: 1px solid var(--border-chip);
+    color: var(--text-secondary);
+    background: var(--bg-chip);
     font-family: 'Inter', sans-serif;
+    transition: background 0.3s, border-color 0.3s, color 0.3s;
   }
   .filter-chip.active {
-    background: #F5F0E8;
-    color: #141414;
-    border-color: #F5F0E8;
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    border-color: var(--btn-primary-bg);
   }
 
+  /* Ernie's Pick — always blue, both themes */
   .ernie-pick-card {
-    background: linear-gradient(135deg, #0039A6, #001F5E);
+    background: linear-gradient(135deg, #0039A6, #0052CC);
     border-radius: 20px;
     padding: 20px;
     margin-bottom: 12px;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 6px 24px rgba(0,57,166,0.25);
   }
-
   .ernie-pick-card::before {
     content: '';
     position: absolute;
     top: -20px; right: -20px;
-    width: 100px;
-    height: 100px;
-    background: rgba(255,255,255,0.04);
+    width: 100px; height: 100px;
+    background: rgba(255,255,255,0.05);
     border-radius: 50%;
   }
-
   .ernie-badge {
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    background: rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.18);
     border-radius: 6px;
     padding: 4px 8px;
-    font-size: 10px;
-    font-weight: 800;
+    font-size: 10px; font-weight: 800;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: #fff;
     margin-bottom: 10px;
   }
-
-  .ernie-pick-name {
-    font-size: 18px;
-    font-weight: 900;
-    color: #fff;
-    letter-spacing: -0.01em;
-    margin-bottom: 4px;
-  }
-
-  .ernie-pick-desc {
-    font-size: 13px;
-    color: rgba(255,255,255,0.65);
-    line-height: 1.4;
-    margin-bottom: 12px;
-  }
-
-  .ernie-pick-meta {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .ernie-pick-cat {
-    font-size: 11px;
-    font-weight: 700;
-    color: rgba(255,255,255,0.45);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .ernie-pick-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.25); }
-
-  .ernie-pick-dist {
-    font-size: 11px;
-    font-weight: 600;
-    color: rgba(255,255,255,0.45);
-  }
+  .ernie-pick-name { font-size: 18px; font-weight: 900; color: #fff; letter-spacing: -0.01em; margin-bottom: 4px; }
+  .ernie-pick-desc { font-size: 13px; color: rgba(255,255,255,0.68); line-height: 1.4; margin-bottom: 12px; }
+  .ernie-pick-meta { display: flex; align-items: center; gap: 10px; }
+  .ernie-pick-cat { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
+  .ernie-pick-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+  .ernie-pick-dist { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.5); }
 
   .place-card {
-    background: #1C1C1E;
+    background: var(--bg-card);
     border-radius: 16px;
     padding: 16px;
     margin-bottom: 10px;
     display: flex;
     gap: 14px;
     align-items: center;
-    border: 1px solid rgba(245,240,232,0.05);
+    border: 1px solid var(--border-card);
+    box-shadow: var(--card-shadow);
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
   }
 
   .place-icon {
-    width: 48px;
-    height: 48px;
+    width: 48px; height: 48px;
     border-radius: 12px;
-    background: #252527;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: var(--bg-icon-well);
+    display: flex; align-items: center; justify-content: center;
     font-size: 22px;
     flex-shrink: 0;
+    border: 1px solid var(--border-icon-well);
+    transition: background 0.3s, border-color 0.3s;
   }
 
   .place-info { flex: 1; }
-
-  .place-name {
-    font-size: 15px;
-    font-weight: 700;
-    color: #F5F0E8;
-    letter-spacing: -0.01em;
-    margin-bottom: 3px;
-  }
-
-  .place-meta {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-
-  .place-tag {
-    font-size: 11px;
-    color: rgba(245,240,232,0.35);
-    font-weight: 600;
-  }
-
-  .place-dot { width: 2px; height: 2px; border-radius: 50%; background: rgba(245,240,232,0.2); }
-
-  .place-rating {
-    font-size: 11px;
-    font-weight: 700;
-    color: #FCCC0A;
-  }
-
-  .place-dist {
-    font-size: 11px;
-    color: rgba(245,240,232,0.3);
-    font-weight: 600;
-  }
-
-  .place-open {
-    font-size: 11px;
-    font-weight: 700;
-    color: #6CBE45;
-  }
+  .place-name { font-size: 15px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.01em; margin-bottom: 3px; transition: color 0.3s; }
+  .place-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .place-tag { font-size: 11px; color: var(--text-secondary); font-weight: 600; transition: color 0.3s; }
+  .place-dot { width: 2px; height: 2px; border-radius: 50%; background: var(--border-chip); transition: background 0.3s; }
+  .place-rating { font-size: 11px; font-weight: 700; color: var(--rating-color); transition: color 0.3s; }
+  .place-dist { font-size: 11px; color: var(--text-tertiary); font-weight: 600; transition: color 0.3s; }
+  .place-open { font-size: 11px; font-weight: 700; color: var(--open-color); transition: color 0.3s; }
 
   .save-btn {
-    width: 32px;
-    height: 32px;
+    width: 32px; height: 32px;
     border-radius: 50%;
-    background: rgba(245,240,232,0.07);
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 16px;
+    background: var(--bg-save-btn);
+    border: 1px solid var(--border-save-btn);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 15px;
     flex-shrink: 0;
+    transition: background 0.3s, border-color 0.3s;
   }
 
   /* ─── SCREEN 4: SAVED ─── */
@@ -624,125 +760,89 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    background: #141414;
+    background: var(--bg-phone);
     padding: 0 20px;
+    transition: background 0.3s;
   }
 
-  .saved-header {
-    padding-top: 20px;
-    margin-bottom: 24px;
-  }
-
-  .saved-title {
-    font-size: 28px;
-    font-weight: 900;
-    color: #F5F0E8;
-    letter-spacing: -0.02em;
-    margin-bottom: 4px;
-  }
-
-  .saved-sub {
-    font-size: 13px;
-    color: rgba(245,240,232,0.35);
-    font-weight: 500;
-  }
+  .saved-header { padding-top: 20px; margin-bottom: 24px; }
+  .saved-title { font-size: 28px; font-weight: 900; color: var(--text-primary); letter-spacing: -0.02em; margin-bottom: 4px; transition: color 0.3s; }
+  .saved-sub { font-size: 13px; color: var(--text-secondary); font-weight: 500; transition: color 0.3s; }
 
   .saved-card {
-    background: #1C1C1E;
+    background: var(--bg-card);
     border-radius: 18px;
     padding: 18px;
     margin-bottom: 10px;
-    border: 1px solid rgba(245,240,232,0.05);
+    border: 1px solid var(--border-card);
     display: flex;
     align-items: center;
     gap: 14px;
+    box-shadow: var(--card-shadow);
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
   }
 
   .saved-line-dot {
-    width: 40px;
-    height: 40px;
+    width: 40px; height: 40px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    font-weight: 900;
-    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 900; color: #fff;
     flex-shrink: 0;
   }
+  [data-theme="light"] .saved-line-dot { box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
 
   .saved-info { flex: 1; }
+  .saved-stop-name { font-size: 15px; font-weight: 800; color: var(--text-primary); letter-spacing: -0.01em; margin-bottom: 3px; transition: color 0.3s; }
+  .saved-stop-meta { font-size: 12px; color: var(--text-secondary); font-weight: 500; transition: color 0.3s; }
+  .saved-arrow { color: var(--text-tertiary); font-size: 18px; transition: color 0.3s; }
 
-  .saved-stop-name {
-    font-size: 15px;
-    font-weight: 800;
-    color: #F5F0E8;
-    letter-spacing: -0.01em;
-    margin-bottom: 3px;
-  }
-
-  .saved-stop-meta {
-    font-size: 12px;
-    color: rgba(245,240,232,0.35);
-    font-weight: 500;
-  }
-
-  .saved-arrow {
-    color: rgba(245,240,232,0.2);
-    font-size: 18px;
-  }
-
+  /* ─── TAB BAR ─── */
   .tab-bar {
     position: absolute;
     bottom: 0; left: 0; right: 0;
     height: 80px;
-    background: rgba(20,20,20,0.95);
+    background: var(--bg-tab-bar);
     backdrop-filter: blur(20px);
-    border-top: 1px solid rgba(245,240,232,0.07);
+    border-top: 1px solid var(--border-tab-bar);
     display: flex;
     align-items: center;
     justify-content: space-around;
     padding-bottom: 16px;
+    transition: background 0.3s, border-color 0.3s;
   }
 
-  .tab-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
-    cursor: pointer;
-    flex: 1;
-  }
-
-  .tab-icon { font-size: 22px; opacity: 0.35; }
+  .tab-item { display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; flex: 1; }
+  .tab-icon { font-size: 22px; opacity: var(--tab-icon-opacity); transition: opacity 0.3s; }
   .tab-icon.active { opacity: 1; }
-  .tab-label { font-size: 10px; font-weight: 600; color: rgba(245,240,232,0.35); letter-spacing: 0.04em; }
-  .tab-label.active { color: #F5F0E8; }
-
-  /* nav tab highlight */
-  .tab-active-dot {
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: #F5F0E8;
-    margin-top: 2px;
-  }
+  .tab-label { font-size: 10px; font-weight: 600; color: var(--text-tab-inactive); letter-spacing: 0.04em; transition: color 0.3s; }
+  .tab-label.active { color: var(--text-tab-active); }
 
   .nav-indicator {
-    width: 134px;
-    height: 5px;
-    background: rgba(245,240,232,0.3);
+    width: 134px; height: 5px;
+    background: var(--nav-indicator);
     border-radius: 3px;
     position: absolute;
-    bottom: 8px;
-    left: 50%;
+    bottom: 8px; left: 50%;
     transform: translateX(-50%);
+    transition: background 0.3s;
   }
 </style>
 </head>
 <body>
 
-<!-- ─── SCREEN 1: HOME / LINE SELECTION ─── -->
+<!-- ─── THEME TOGGLE ─── -->
+<div class="top-bar">
+  <span class="top-bar-label">Dark</span>
+  <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle theme">
+    <div class="toggle-thumb" id="toggleThumb">🌙</div>
+    <span class="toggle-icon-bg" id="toggleBgIcon">☀️</span>
+  </div>
+  <span class="top-bar-label">Light</span>
+</div>
+
+<div class="screens-row">
+
+<!-- ─── SCREEN 1: HOME ─── -->
 <div class="phone-wrap">
   <div class="phone-label">Home — Line Selection</div>
   <div class="phone">
@@ -759,7 +859,6 @@
         <div class="home-headline">Where's Ernie<br>taking you?</div>
         <div class="home-sub">Pick a line. Get a stop. Go explore.</div>
       </div>
-
       <div class="section-label">Choose a line</div>
       <div class="line-grid">
         <div class="line-bubble line-1">1</div>
@@ -787,38 +886,23 @@
         <div class="line-bubble line-S">S</div>
         <div class="line-bubble line-SIR">SIR</div>
       </div>
-
       <div class="divider-row">
         <div class="divider-line"></div>
         <div class="divider-text">or</div>
         <div class="divider-line"></div>
       </div>
-
-      <button class="surprise-btn">
-        <span class="dice">🎲</span>
-        Surprise me, Ernie
-      </button>
+      <button class="surprise-btn"><span class="dice">🎲</span>Surprise me, Ernie</button>
     </div>
-
     <div class="tab-bar">
-      <div class="tab-item">
-        <div class="tab-icon active">🗺️</div>
-        <div class="tab-label active">Explore</div>
-      </div>
-      <div class="tab-item">
-        <div class="tab-icon">🔖</div>
-        <div class="tab-label">Saved</div>
-      </div>
-      <div class="tab-item">
-        <div class="tab-icon">⚙️</div>
-        <div class="tab-label">Settings</div>
-      </div>
+      <div class="tab-item"><div class="tab-icon active">🗺️</div><div class="tab-label active">Explore</div></div>
+      <div class="tab-item"><div class="tab-icon">🔖</div><div class="tab-label">Saved</div></div>
+      <div class="tab-item"><div class="tab-icon">⚙️</div><div class="tab-label">Settings</div></div>
     </div>
     <div class="nav-indicator"></div>
   </div>
 </div>
 
-<!-- ─── SCREEN 2: STOP REVEAL ─── -->
+<!-- ─── SCREEN 2: REVEAL ─── -->
 <div class="phone-wrap">
   <div class="phone-label">Stop Reveal — A Train</div>
   <div class="phone">
@@ -829,45 +913,22 @@
         <svg viewBox="0 0 24 24"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
       </div>
     </div>
-
     <div class="screen-reveal">
       <button class="back-btn">← Lines</button>
-
       <div class="line-badge">A</div>
       <div class="reveal-label">Your stop is…</div>
-
       <div class="splitflap-container">
-        <!-- Row 1: ROCKAWAY -->
         <div class="splitflap-row">
-          <div class="flap">R</div>
-          <div class="flap">O</div>
-          <div class="flap">C</div>
-          <div class="flap">K</div>
-          <div class="flap">A</div>
-          <div class="flap">W</div>
-          <div class="flap">A</div>
-          <div class="flap">Y</div>
+          <div class="flap">R</div><div class="flap">O</div><div class="flap">C</div><div class="flap">K</div><div class="flap">A</div><div class="flap">W</div><div class="flap">A</div><div class="flap">Y</div>
         </div>
-        <!-- Row 2: BLVD -->
-        <div class="splitflap-row" style="justify-content: center; gap: 4px;">
-          <div class="flap">B</div>
-          <div class="flap">L</div>
-          <div class="flap">V</div>
-          <div class="flap">D</div>
+        <div class="splitflap-row">
+          <div class="flap">B</div><div class="flap">L</div><div class="flap">V</div><div class="flap">D</div>
         </div>
-
         <div class="stop-neighborhood">Far Rockaway · Queens</div>
-        <div style="text-align:center;">
-          <span class="borough-tag">A Train</span>
-        </div>
+        <div style="text-align:center;"><span class="borough-tag">A Train</span></div>
       </div>
-
-      <button class="reroll-btn">
-        🔄 Roll again
-      </button>
-      <button class="letsgo-btn">
-        Let's go →
-      </button>
+      <button class="reroll-btn">🔄 Roll again</button>
+      <button class="letsgo-btn">Let's go →</button>
     </div>
     <div class="nav-indicator"></div>
   </div>
@@ -878,28 +939,23 @@
   <div class="phone-label">Explore — Rockaway Blvd</div>
   <div class="phone">
     <div class="status-bar" style="position:absolute;top:0;left:0;right:0;z-index:10;">
-      <span class="time" style="color:#F5F0E8;">9:41</span>
+      <span class="time">9:41</span>
       <div class="status-icons">
-        <svg viewBox="0 0 24 24" style="fill:#F5F0E8;"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.237 4.237 0 00-6 0zm-4-4l2 2a7.074 7.074 0 0110 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
-        <svg viewBox="0 0 24 24" style="fill:#F5F0E8;"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.237 4.237 0 00-6 0zm-4-4l2 2a7.074 7.074 0 0110 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
       </div>
     </div>
-
     <div class="screen-explore">
-      <!-- MAP -->
       <div class="map-area">
         <div class="map-grid">
-          <!-- horizontal streets -->
           <div class="map-street-h" style="top:30%"></div>
           <div class="map-street-h" style="top:50%"></div>
           <div class="map-street-h" style="top:70%"></div>
           <div class="map-street-h" style="top:85%"></div>
-          <!-- vertical streets -->
           <div class="map-street-v" style="left:20%"></div>
           <div class="map-street-v" style="left:40%"></div>
           <div class="map-street-v" style="left:60%"></div>
           <div class="map-street-v" style="left:80%"></div>
-          <!-- blocks -->
           <div class="map-block" style="top:32%;left:21%;width:17%;height:16%;"></div>
           <div class="map-block" style="top:32%;left:41%;width:17%;height:16%;"></div>
           <div class="map-block" style="top:32%;left:61%;width:17%;height:16%;"></div>
@@ -909,28 +965,22 @@
           <div class="map-block" style="top:72%;left:41%;width:17%;height:10%;"></div>
           <div class="map-block" style="top:72%;left:61%;width:17%;height:10%;"></div>
         </div>
-        <!-- POIs -->
         <div class="map-poi" style="top:38%;left:25%;">🍕</div>
         <div class="map-poi" style="top:55%;left:65%;">🍺</div>
         <div class="map-poi" style="top:28%;left:60%;">🌊</div>
-        <!-- Pin -->
         <div class="map-pin">
           <div class="map-pin-bubble">A</div>
           <div class="map-pin-tail"></div>
         </div>
-        <!-- Header overlay -->
         <div class="explore-header">
           <div>
             <div class="explore-stop-name">Rockaway Blvd</div>
             <div class="explore-stop-sub">A Train · Far Rockaway, Queens</div>
           </div>
-          <button style="background:rgba(20,20,20,0.7);border:none;border-radius:10px;padding:6px 12px;color:#F5F0E8;font-size:12px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;">🔄 Re-roll</button>
+          <button class="reroll-map-btn">🔄 Re-roll</button>
         </div>
       </div>
-
-      <!-- CONTENT -->
       <div class="content-area">
-        <!-- Filter strip -->
         <div class="filter-strip">
           <button class="filter-chip active">All</button>
           <button class="filter-chip">🍽️ Food</button>
@@ -939,8 +989,6 @@
           <button class="filter-chip">🎭 Culture</button>
           <button class="filter-chip">☕ Coffee</button>
         </div>
-
-        <!-- Uncle Ernie Pick -->
         <div class="ernie-pick-card">
           <div class="ernie-badge">✦ Ernie's Pick</div>
           <div class="ernie-pick-name">Connolly's Beach Bar</div>
@@ -951,80 +999,57 @@
             <div class="ernie-pick-dist">0.3 mi from stop</div>
           </div>
         </div>
-
-        <!-- Regular place cards -->
         <div class="place-card">
           <div class="place-icon">🍕</div>
           <div class="place-info">
             <div class="place-name">Rippers</div>
             <div class="place-meta">
-              <span class="place-tag">Burgers & Beer</span>
-              <span class="place-dot"></span>
-              <span class="place-rating">★ 4.6</span>
-              <span class="place-dot"></span>
-              <span class="place-open">Open</span>
-              <span class="place-dot"></span>
+              <span class="place-tag">Burgers & Beer</span><span class="place-dot"></span>
+              <span class="place-rating">★ 4.6</span><span class="place-dot"></span>
+              <span class="place-open">Open</span><span class="place-dot"></span>
               <span class="place-dist">0.5 mi</span>
             </div>
           </div>
           <button class="save-btn">🔖</button>
         </div>
-
         <div class="place-card">
           <div class="place-icon">🌊</div>
           <div class="place-info">
             <div class="place-name">Rockaway Beach</div>
             <div class="place-meta">
-              <span class="place-tag">Beach · Park</span>
-              <span class="place-dot"></span>
-              <span class="place-rating">★ 4.8</span>
-              <span class="place-dot"></span>
-              <span class="place-open">Open</span>
-              <span class="place-dot"></span>
+              <span class="place-tag">Beach · Park</span><span class="place-dot"></span>
+              <span class="place-rating">★ 4.8</span><span class="place-dot"></span>
+              <span class="place-open">Open</span><span class="place-dot"></span>
               <span class="place-dist">0.7 mi</span>
             </div>
           </div>
           <button class="save-btn">🔖</button>
         </div>
-
         <div class="place-card">
           <div class="place-icon">☕</div>
           <div class="place-info">
             <div class="place-name">Boardwalk Coffee</div>
             <div class="place-meta">
-              <span class="place-tag">Coffee</span>
-              <span class="place-dot"></span>
-              <span class="place-rating">★ 4.4</span>
-              <span class="place-dot"></span>
-              <span class="place-open">Open</span>
-              <span class="place-dot"></span>
+              <span class="place-tag">Coffee</span><span class="place-dot"></span>
+              <span class="place-rating">★ 4.4</span><span class="place-dot"></span>
+              <span class="place-open">Open</span><span class="place-dot"></span>
               <span class="place-dist">1.1 mi</span>
             </div>
           </div>
           <button class="save-btn">🔖</button>
         </div>
       </div>
-
       <div class="tab-bar">
-        <div class="tab-item">
-          <div class="tab-icon active">🗺️</div>
-          <div class="tab-label active">Explore</div>
-        </div>
-        <div class="tab-item">
-          <div class="tab-icon">🔖</div>
-          <div class="tab-label">Saved</div>
-        </div>
-        <div class="tab-item">
-          <div class="tab-icon">⚙️</div>
-          <div class="tab-label">Settings</div>
-        </div>
+        <div class="tab-item"><div class="tab-icon active">🗺️</div><div class="tab-label active">Explore</div></div>
+        <div class="tab-item"><div class="tab-icon">🔖</div><div class="tab-label">Saved</div></div>
+        <div class="tab-item"><div class="tab-icon">⚙️</div><div class="tab-label">Settings</div></div>
       </div>
     </div>
     <div class="nav-indicator"></div>
   </div>
 </div>
 
-<!-- ─── SCREEN 4: SAVED STOPS ─── -->
+<!-- ─── SCREEN 4: SAVED ─── -->
 <div class="phone-wrap">
   <div class="phone-label">Saved Stops</div>
   <div class="phone">
@@ -1035,13 +1060,11 @@
         <svg viewBox="0 0 24 24"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
       </div>
     </div>
-
     <div class="screen-saved">
       <div class="saved-header">
         <div class="saved-title">Saved Stops</div>
         <div class="saved-sub">4 adventures saved</div>
       </div>
-
       <div class="saved-card">
         <div class="saved-line-dot line-A">A</div>
         <div class="saved-info">
@@ -1050,7 +1073,6 @@
         </div>
         <div class="saved-arrow">›</div>
       </div>
-
       <div class="saved-card">
         <div class="saved-line-dot line-L">L</div>
         <div class="saved-info">
@@ -1059,7 +1081,6 @@
         </div>
         <div class="saved-arrow">›</div>
       </div>
-
       <div class="saved-card">
         <div class="saved-line-dot line-7">7</div>
         <div class="saved-info">
@@ -1068,7 +1089,6 @@
         </div>
         <div class="saved-arrow">›</div>
       </div>
-
       <div class="saved-card">
         <div class="saved-line-dot" style="background:#FF6319;">B</div>
         <div class="saved-info">
@@ -1078,24 +1098,28 @@
         <div class="saved-arrow">›</div>
       </div>
     </div>
-
     <div class="tab-bar">
-      <div class="tab-item">
-        <div class="tab-icon">🗺️</div>
-        <div class="tab-label">Explore</div>
-      </div>
-      <div class="tab-item">
-        <div class="tab-icon active">🔖</div>
-        <div class="tab-label active">Saved</div>
-      </div>
-      <div class="tab-item">
-        <div class="tab-icon">⚙️</div>
-        <div class="tab-label">Settings</div>
-      </div>
+      <div class="tab-item"><div class="tab-icon">🗺️</div><div class="tab-label">Explore</div></div>
+      <div class="tab-item"><div class="tab-icon active">🔖</div><div class="tab-label active">Saved</div></div>
+      <div class="tab-item"><div class="tab-icon">⚙️</div><div class="tab-label">Settings</div></div>
     </div>
     <div class="nav-indicator"></div>
   </div>
 </div>
 
+</div><!-- end screens-row -->
+
+<script>
+  function toggleTheme() {
+    const html = document.documentElement;
+    const thumb = document.getElementById('toggleThumb');
+    const bgIcon = document.getElementById('toggleBgIcon');
+    const isDark = html.getAttribute('data-theme') === 'dark';
+
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    thumb.textContent = isDark ? '☀️' : '🌙';
+    bgIcon.textContent = isDark ? '🌙' : '☀️';
+  }
+</script>
 </body>
 </html>
