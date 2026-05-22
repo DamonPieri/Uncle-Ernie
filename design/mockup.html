@@ -491,21 +491,22 @@
   .reroll-btn {
     width: 100%;
     padding: 16px;
-    background: var(--bg-reroll-btn);
-    border: 1px solid var(--border-reroll);
+    background: #264E36;
+    border: 1px solid #264E36;
     border-radius: 14px;
     font-family: 'Inter', sans-serif;
     font-size: 15px;
     font-weight: 700;
-    color: var(--btn-secondary-text);
+    color: #fff;
     cursor: pointer;
     margin-bottom: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    transition: background 0.3s, border-color 0.3s, color 0.3s;
+    transition: opacity 0.15s;
   }
+  .reroll-btn:hover { opacity: 0.88; }
 
   .letsgo-btn {
     width: 100%;
@@ -856,7 +857,7 @@
     <div class="screen-home">
       <div class="home-header">
         <div class="app-title">Uncle Ernie</div>
-        <div class="home-headline">Where's Ernie<br>taking you?</div>
+        <div class="home-headline">Where is Uncle Ernie taking you?</div>
         <div class="home-sub">Pick a line. Get a stop. Go explore.</div>
       </div>
       <div class="section-label">Choose a line</div>
@@ -927,7 +928,7 @@
         <div class="stop-neighborhood">Far Rockaway · Queens</div>
         <div style="text-align:center;"><span class="borough-tag">A Train</span></div>
       </div>
-      <button class="reroll-btn">🔄 Roll again</button>
+      <button class="reroll-btn">🪙 Roll again</button>
       <button class="letsgo-btn">Let's go →</button>
     </div>
     <div class="nav-indicator"></div>

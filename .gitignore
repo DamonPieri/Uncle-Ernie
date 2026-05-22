@@ -9,3 +9,13 @@
 # Backup / temp files
 *.copy
 *\ copy
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
