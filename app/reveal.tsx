@@ -6,7 +6,7 @@ import {
   useColorScheme, Animated,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import * as Haptics from 'expo-haptics';
+import { haptic } from '@/hooks/useHaptics';
 import { DARK, LIGHT, FONT_SIZE, SPACE, RADIUS, BRAND } from '@/constants/theme';
 import { LINE_COLORS, LINE_DARK_TEXT } from '@/constants/theme';
 import { getRandomStop } from '@/constants/subway';
@@ -76,13 +76,13 @@ export default function RevealScreen() {
   const lineLabelDark = selectedLine ? LINE_DARK_TEXT.has(selectedLine) : false;
 
   function reroll() {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    haptic.medium();
     const stop = getRandomStop(selectedLine ?? undefined);
     setCurrentStop(stop);
   }
 
   function goExplore() {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    haptic.light();
     router.push('/(tabs)/explore' as any);
   }
 

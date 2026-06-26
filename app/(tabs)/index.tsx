@@ -5,7 +5,7 @@ import {
   StyleSheet, useColorScheme, ScrollView,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import * as Haptics from 'expo-haptics';
+import { haptic } from '@/hooks/useHaptics';
 import { DARK, LIGHT, FONT_SIZE, SPACE, RADIUS, BRAND } from '@/constants/theme';
 import { SUBWAY_LINES, getRandomStop } from '@/constants/subway';
 import { useSubwayStore } from '@/store/subway';
@@ -17,7 +17,7 @@ export default function HomeScreen() {
   const { selectedLine, setSelectedLine, setCurrentStop } = useSubwayStore();
 
   function pickLine(lineId: string) {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    haptic.light();
     setSelectedLine(lineId);
     const stop = getRandomStop(lineId);
     setCurrentStop(stop);
@@ -25,7 +25,7 @@ export default function HomeScreen() {
   }
 
   function surpriseMe() {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    haptic.medium();
     setSelectedLine(null);
     const stop = getRandomStop();
     setCurrentStop(stop);

@@ -25,7 +25,6 @@ module.exports = {
     },
     plugins: [
       "expo-router",
-      "expo-haptics",
       [
         "expo-build-properties",
         {

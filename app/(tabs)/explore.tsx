@@ -6,7 +6,7 @@ import {
   StyleSheet, useColorScheme,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import * as Haptics from 'expo-haptics';
+import { haptic } from '@/hooks/useHaptics';
 import { DARK, LIGHT, FONT_SIZE, SPACE, RADIUS, BRAND } from '@/constants/theme';
 import { LINE_COLORS } from '@/constants/theme';
 import { useSubwayStore } from '@/store/subway';
@@ -94,7 +94,7 @@ export default function ExploreScreen() {
                 activeCategory === cat && { backgroundColor: t.btnPrimaryBg, borderColor: t.btnPrimaryBg },
               ]}
               onPress={() => {
-                Haptics.selectionAsync();
+                haptic.selection();
                 setActiveCategory(cat);
               }}
             >
