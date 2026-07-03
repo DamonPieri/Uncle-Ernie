@@ -29,7 +29,7 @@ module.exports = {
         "expo-build-properties",
         {
           android: { compileSdkVersion: 34 },
-          ios: { deploymentTarget: "15.1" },
+          ios: { deploymentTarget: "16.4" },
         },
       ],
     ],
