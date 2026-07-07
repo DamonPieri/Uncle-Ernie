@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { haptic } from '@/hooks/useHaptics';
+import { FontAwesome5 } from '@expo/vector-icons';
 import { DARK, LIGHT, FONT_SIZE, SPACE, RADIUS, BRAND } from '@/constants/theme';
 import { SUBWAY_LINES, getRandomStop } from '@/constants/subway';
 import { useSubwayStore } from '@/store/subway';
@@ -80,7 +81,7 @@ export default function HomeScreen() {
           onPress={surpriseMe}
           activeOpacity={0.88}
         >
-          <Text style={styles.surpriseDice}>🎲</Text>
+          <FontAwesome5 name="dice" size={22} color={t.btnPrimaryText} />
           <Text style={[styles.surpriseText, { color: t.btnPrimaryText }]}>
             Surprise me, Ernie
           </Text>
@@ -105,6 +106,5 @@ const styles = StyleSheet.create({
   dividerLine: { flex: 1, height: 1 },
   dividerText: { fontSize: FONT_SIZE.xs, fontWeight: '600', letterSpacing: 1 },
   surpriseBtn: { borderRadius: RADIUS.lg, padding: SPACE[4], flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 10 },
-  surpriseDice:{ fontSize: 22 },
   surpriseText:{ fontSize: FONT_SIZE.lg, fontWeight: '800', letterSpacing: -0.2 },
 });

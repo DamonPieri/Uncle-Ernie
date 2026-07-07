@@ -1,16 +1,23 @@
 import { Tabs } from 'expo-router';
 import { useColorScheme, View, Text, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { DARK, LIGHT } from '@/constants/theme';
 
-function TabIcon({ emoji, label, focused }: { emoji: string; label: string; focused: boolean }) {
+type IoniconsName = React.ComponentProps<typeof Ionicons>['name'];
+
+function TabIcon({ icon, iconFocused, label, focused }: {
+  icon: IoniconsName;
+  iconFocused: IoniconsName;
+  label: string;
+  focused: boolean;
+}) {
   const cs = useColorScheme();
   const t = cs === 'dark' ? DARK : LIGHT;
+  const color = focused ? t.textPrimary : t.textSecondary;
   return (
     <View style={styles.tabItem}>
-      <Text style={[styles.tabEmoji, { opacity: focused ? 1 : 0.35 }]}>{emoji}</Text>
-      <Text style={[styles.tabLabel, { color: focused ? t.textPrimary : t.textSecondary }]}>
-        {label}
-      </Text>
+      <Ionicons name={focused ? iconFocused : icon} size={24} color={color} />
+      <Text style={[styles.tabLabel, { color }]} numberOfLines={1}>{label}</Text>
     </View>
   );
 }
@@ -27,7 +34,8 @@ export default function TabLayout() {
           backgroundColor: t.bgTabBar,
           borderTopColor: t.borderTabBar,
           borderTopWidth: 1,
-          height: 80,
+          height: 90,
+          paddingTop: 10,
           paddingBottom: 16,
         },
         tabBarShowLabel: false,
@@ -36,27 +44,36 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          tabBarIcon: ({ focused }) => <TabIcon emoji="🗺️" label="Explore" focused={focused} />,
+          tabBarIcon: ({ focused }) => (
+            <TabIcon icon="map-outline" iconFocused="map" label="Explore" focused={focused} />
+          ),
         }}
       />
       <Tabs.Screen
         name="saved"
         options={{
-          tabBarIcon: ({ focused }) => <TabIcon emoji="🔖" label="Saved" focused={focused} />,
+          tabBarIcon: ({ focused }) => (
+            <TabIcon icon="bookmark-outline" iconFocused="bookmark" label="Saved" focused={focused} />
+          ),
         }}
       />
       <Tabs.Screen
         name="settings"
         options={{
-          tabBarIcon: ({ focused }) => <TabIcon emoji="⚙️" label="Settings" focused={focused} />,
+          tabBarIcon: ({ focused }) => (
+            <TabIcon icon="settings-outline" iconFocused="settings" label="Settings" focused={focused} />
+          ),
         }}
+      />
+      <Tabs.Screen
+        name="explore"
+        options={{ href: null }}
       />
     </Tabs>
   );
 }
 
 const styles = StyleSheet.create({
-  tabItem:  { alignItems: 'center', gap: 3 },
-  tabEmoji: { fontSize: 22 },
-  tabLabel: { fontSize: 10, fontWeight: '600', letterSpacing: 0.4 },
+  tabItem:  { alignItems: 'center', gap: 3, minWidth: 70 },
+  tabLabel: { fontSize: 8, fontWeight: '600', letterSpacing: 0.2 },
 });
