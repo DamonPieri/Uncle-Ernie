@@ -6,10 +6,12 @@ import {
   StyleSheet, useColorScheme,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { FontAwesome5 } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { haptic } from '@/hooks/useHaptics';
 import { DARK, LIGHT, FONT_SIZE, SPACE, RADIUS, BRAND } from '@/constants/theme';
 import { LINE_COLORS } from '@/constants/theme';
-import { useSubwayStore } from '@/store/subway';
+import { useSubwayStore, SavedPlace } from '@/store/subway';
 
 const CATEGORIES = ['All', '🍽️ Food', '🍺 Bars', '🌿 Outdoor', '🎭 Culture', '☕ Coffee'];
 
@@ -24,8 +26,26 @@ export default function ExploreScreen() {
   const router = useRouter();
   const cs     = useColorScheme();
   const t      = cs === 'dark' ? DARK : LIGHT;
-  const { currentStop, selectedLine, saveStop, unsaveStop, isStopSaved } = useSubwayStore();
+  const { currentStop, selectedLine, savePlace, unsavePlace, isPlaceSaved } = useSubwayStore();
   const [activeCategory, setActiveCategory] = useState('All');
+
+  function togglePlace(place: typeof PLACEHOLDER_PLACES[0]) {
+    if (!currentStop || !selectedLine) return;
+    if (isPlaceSaved(place.id)) {
+      haptic.light();
+      unsavePlace(place.id);
+    } else {
+      haptic.medium();
+      const saved: SavedPlace = {
+        ...place,
+        line: selectedLine,
+        stopName: currentStop.name,
+        stopId: currentStop.id,
+        savedAt: Date.now(),
+      };
+      savePlace(saved);
+    }
+  }
 
   const lineColor = selectedLine ? (LINE_COLORS[selectedLine] ?? BRAND.blue) : BRAND.blue;
 
@@ -48,8 +68,6 @@ export default function ExploreScreen() {
       </SafeAreaView>
     );
   }
-
-  const saved = isStopSaved(currentStop.id);
 
   return (
     <View style={[styles.container, { backgroundColor: t.bgPhone }]}>
@@ -74,7 +92,8 @@ export default function ExploreScreen() {
             style={[styles.rerollMapBtn, { backgroundColor: cs === 'dark' ? 'rgba(20,20,20,0.75)' : 'rgba(247,243,236,0.9)', borderColor: t.borderInput }]}
             onPress={() => router.push('/reveal')}
           >
-            <Text style={[styles.rerollMapText, { color: t.textPrimary }]}>🪙 Re-roll</Text>
+            <FontAwesome5 name="dice" size={14} color={t.textPrimary} />
+            <Text style={[styles.rerollMapText, { color: t.textPrimary }]}> Re-roll</Text>
           </TouchableOpacity>
         </SafeAreaView>
 
@@ -142,8 +161,15 @@ export default function ExploreScreen() {
                   <Text style={[styles.placeDist, { color: t.textTertiary }]}>{place.dist}</Text>
                 </View>
               </View>
-              <TouchableOpacity style={[styles.saveBtn, { backgroundColor: t.bgInput }]}>
-                <Text>🔖</Text>
+              <TouchableOpacity
+                style={[styles.saveBtn, { backgroundColor: isPlaceSaved(place.id) ? BRAND.blue : t.bgInput }]}
+                onPress={() => togglePlace(place)}
+              >
+                <Ionicons
+                  name={isPlaceSaved(place.id) ? 'bookmark' : 'bookmark-outline'}
+                  size={16}
+                  color={isPlaceSaved(place.id) ? '#fff' : t.textSecondary}
+                />
               </TouchableOpacity>
             </View>
           ))}

@@ -6,6 +6,7 @@ import {
   useColorScheme, Animated, useWindowDimensions,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { FontAwesome5 } from '@expo/vector-icons';
 import { haptic } from '@/hooks/useHaptics';
 import { DARK, LIGHT, FONT_SIZE, SPACE, RADIUS, BRAND } from '@/constants/theme';
 import { LINE_COLORS, LINE_DARK_TEXT } from '@/constants/theme';
@@ -162,7 +163,7 @@ export default function RevealScreen() {
           onPress={reroll}
           activeOpacity={0.88}
         >
-          <Text style={styles.rerollEmoji}>🪙</Text>
+          <FontAwesome5 name="dice" size={18} color="#fff" />
           <Text style={styles.rerollText}>Roll again</Text>
         </TouchableOpacity>
 
@@ -196,7 +197,6 @@ const styles = StyleSheet.create({
   linePillText:      { fontSize: FONT_SIZE.xs, fontWeight: '700', color: '#6B9AFF', letterSpacing: 1 },
   actions:           { paddingHorizontal: SPACE[6], paddingBottom: SPACE[6], gap: 12 },
   rerollBtn:         { backgroundColor: BRAND.green, borderRadius: RADIUS.lg, padding: SPACE[4], flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8 },
-  rerollEmoji:       { fontSize: 18 },
   rerollText:        { fontSize: FONT_SIZE.md, fontWeight: '700', color: '#fff' },
   letsGoBtn:         { borderRadius: RADIUS.lg, padding: SPACE[4], alignItems: 'center', justifyContent: 'center' },
   letsGoText:        { fontSize: FONT_SIZE.lg, fontWeight: '800', color: '#fff', letterSpacing: -0.2 },

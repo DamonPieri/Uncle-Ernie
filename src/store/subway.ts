@@ -2,18 +2,35 @@
 import { create } from 'zustand';
 import { SubwayStop } from '@/constants/subway';
 
+export type SavedPlace = {
+  id: string;
+  name: string;
+  emoji: string;
+  tag: string;
+  rating: number;
+  dist: string;
+  open: boolean;
+  // subway context
+  line: string;
+  stopName: string;
+  stopId: string;
+  savedAt: number;
+};
+
 type SubwayStore = {
-  // Selection state
   selectedLine: string | null;
   currentStop: SubwayStop | null;
   savedStops: SubwayStop[];
+  savedPlaces: SavedPlace[];
 
-  // Actions
   setSelectedLine: (line: string | null) => void;
   setCurrentStop:  (stop: SubwayStop | null) => void;
   saveStop:        (stop: SubwayStop) => void;
   unsaveStop:      (stopId: string) => void;
   isStopSaved:     (stopId: string) => boolean;
+  savePlace:       (place: SavedPlace) => void;
+  unsavePlace:     (placeId: string) => void;
+  isPlaceSaved:    (placeId: string) => boolean;
   clearSelection:  () => void;
 };
 
@@ -21,6 +38,7 @@ export const useSubwayStore = create<SubwayStore>((set, get) => ({
   selectedLine: null,
   currentStop:  null,
   savedStops:   [],
+  savedPlaces:  [],
 
   setSelectedLine: (line) => set({ selectedLine: line }),
   setCurrentStop:  (stop) => set({ currentStop: stop }),
@@ -38,6 +56,20 @@ export const useSubwayStore = create<SubwayStore>((set, get) => ({
     })),
 
   isStopSaved: (stopId) => get().savedStops.some((s) => s.id === stopId),
+
+  savePlace: (place) =>
+    set((state) => ({
+      savedPlaces: state.savedPlaces.some((p) => p.id === place.id)
+        ? state.savedPlaces
+        : [place, ...state.savedPlaces],
+    })),
+
+  unsavePlace: (placeId) =>
+    set((state) => ({
+      savedPlaces: state.savedPlaces.filter((p) => p.id !== placeId),
+    })),
+
+  isPlaceSaved: (placeId) => get().savedPlaces.some((p) => p.id === placeId),
 
   clearSelection: () => set({ selectedLine: null, currentStop: null }),
 }));
