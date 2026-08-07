@@ -10,16 +10,13 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen
-          name="reveal"
-          options={{
-            presentation: 'card',
-            animation: 'slide_from_bottom',
-            headerShown: false,
-          }}
-        />
+      <Stack screenOptions={{ headerShown: false, animation: 'slide_from_right' }}>
+        <Stack.Screen name="index" />
+        <Stack.Screen name="reveal" options={{ animation: 'slide_from_bottom' }} />
+        <Stack.Screen name="explore" />
+        <Stack.Screen name="saved" />
+        <Stack.Screen name="settings" />
+        <Stack.Screen name="trip/[id]" />
       </Stack>
     </GestureHandlerRootView>
   );

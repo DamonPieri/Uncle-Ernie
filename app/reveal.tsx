@@ -120,7 +120,7 @@ export default function RevealScreen() {
 
   function goExplore() {
     haptic.light();
-    router.push('/(tabs)/explore' as any);
+    router.push('/explore');
   }
 
   if (!currentStop) return null;
@@ -149,11 +149,6 @@ export default function RevealScreen() {
         <Text style={styles.neighborhood}>
           {currentStop.neighborhood} · {currentStop.borough}
         </Text>
-        <View style={styles.linePill}>
-          <Text style={styles.linePillText}>
-            {currentStop.lines.join(' · ')} Train
-          </Text>
-        </View>
       </View>
 
       {/* Actions */}
@@ -184,8 +179,8 @@ const styles = StyleSheet.create({
   backBtn:           { paddingHorizontal: SPACE[6], paddingTop: SPACE[4] },
   backText:          { fontSize: FONT_SIZE.base, fontWeight: '600' },
   content:           { flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: SPACE[6] },
-  lineBadge:         { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', marginBottom: 12, shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 8, elevation: 6 },
-  lineBadgeText:     { fontSize: 18, fontWeight: '900' },
+  lineBadge:         { width: 100, height: 100, borderRadius: 50, alignItems: 'center', justifyContent: 'center', marginBottom: 16, shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 8, elevation: 6 },
+  lineBadgeText:     { fontSize: 40, fontWeight: '900' },
   revealLabel:       { fontSize: FONT_SIZE.xs, fontWeight: '700', letterSpacing: 3, marginBottom: SPACE[5] },
   splitFlapContainer:{ backgroundColor: '#0D0D0D', borderRadius: RADIUS['2xl'], padding: SPACE[6], width: '100%', alignItems: 'center', gap: 6, marginBottom: SPACE[5] },
   flapRow:           { flexDirection: 'row', gap: 4, justifyContent: 'center' },
